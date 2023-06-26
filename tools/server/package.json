@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "server": "API_BASE_ROUTE='/api' node index.js --open",
+    "server": "SET API_BASE_ROUTE=api &  node index.js --open",
     "server:no-open": "API_BASE_ROUTE='/api' node index.js"
   },
   "author": "",
