@@ -5,9 +5,10 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import * as labsComponents from 'vuetify/labs/components' // Contains <v-skeleton loader/>
 
+import App from './App.vue'
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
-import App from './App.vue'
+import router from './router'
 
 const app = createApp(App)
 
@@ -18,5 +19,7 @@ app.use(
     icons: { defaultSet: 'mdi' }
   })
 )
+
+app.use(router)
 
 app.mount('#app')

@@ -1,16 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import NavBar from '@/components/NavBar.vue'
+</script>
 
 <template>
   <v-layout>
     <header>
-      <!-- Navbar -->
-      Navbar
+      <NavBar />
     </header>
 
     <v-main>
       <v-container>
-        <!-- Contenu -->
-        Hello Vue Intranet
+        <router-view />
       </v-container>
     </v-main>
   </v-layout>
