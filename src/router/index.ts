@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import CreateUserView from '@/views/CreateUserView.vue'
 import HomeView from '@/views/HomeView.vue'
 import ListView from '@/views/ListView.vue'
 
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/list',
       name: 'list',
       component: ListView
+    },
+    {
+      path: '/create-user',
+      name: 'create-user',
+      component: CreateUserView
     }
   ]
 })

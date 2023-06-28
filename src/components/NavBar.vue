@@ -19,7 +19,8 @@ type RouteMenuItem = {
 // Liste des éléments de menu de l'application
 const routes: RouteMenuItem[] = [
   { to: '/', text: 'Accueil' },
-  { to: '/list', text: 'Liste' }
+  { to: '/list', text: 'Liste' },
+  { to: '/create-user', text: 'Ajouter un collaborateur' }
 ]
 </script>
 
