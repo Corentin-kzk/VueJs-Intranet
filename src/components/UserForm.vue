@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { isMajor, isValidEmail, isValidPhone } from '@/lib/helpers'
 import type { User } from '@/services/users.types'
 import { reactive } from 'vue'
 
-const formUser: Omit<User, 'id'> = reactive({
+const formUser = reactive<Partial<User>>({
   gender: 'male',
   firstname: '',
   lastname: '',
@@ -15,10 +16,12 @@ const formUser: Omit<User, 'id'> = reactive({
 })
 
 const rules = {
-  required: (value: string) => {
-    if (value.trim() !== '') return true
-    else return 'Champs obligatoire'
-  }
+  required: (value: string) => !!value || 'Champs obligatoire.',
+  email: (value: string) => isValidEmail(value) || 'E-mail invalide',
+  phone: (value: string) => isValidPhone(value) || 'Numéro de téléphone invalide',
+  birthdate: (value: string) => isMajor(value) || 'Le collaborateur doit être agé de +18 ans',
+  url: (value: string) =>
+    value.trim().length === 0 || value.startsWith('http') || "L'URL est invalide"
 }
 </script>
 
@@ -64,6 +67,7 @@ const rules = {
           density="comfortable"
           label="Email"
           v-model="formUser.email"
+          :rules="[rules.required, rules.email]"
         />
 
         <!-- Téléphone -->
@@ -73,6 +77,7 @@ const rules = {
           density="comfortable"
           label="Téléphone"
           v-model="formUser.phone"
+          :rules="[rules.required, rules.phone]"
         />
 
         <!-- Date de naissance -->
@@ -82,13 +87,26 @@ const rules = {
           density="comfortable"
           label="Date de naissance"
           v-model="formUser.birthdate"
+          :rules="[rules.required, rules.birthdate]"
         />
 
         <!-- Ville -->
-        <v-text-field class="mb-2" density="comfortable" label="Ville" v-model="formUser.city" />
+        <v-text-field
+          class="mb-2"
+          density="comfortable"
+          label="Ville"
+          v-model="formUser.city"
+          :rules="[rules.required]"
+        />
 
         <!-- Pays -->
-        <v-text-field class="mb-2" density="comfortable" label="Pays" v-model="formUser.country" />
+        <v-text-field
+          class="mb-2"
+          density="comfortable"
+          label="Pays"
+          v-model="formUser.country"
+          :rules="[rules.required]"
+        />
 
         <!-- Photo (facultatif) -->
         <v-text-field
@@ -97,6 +115,7 @@ const rules = {
           density="comfortable"
           label="URL de la photo"
           v-model="formUser.photo"
+          :rules="[rules.url]"
         />
 
         <!-- VALIDATION -->
