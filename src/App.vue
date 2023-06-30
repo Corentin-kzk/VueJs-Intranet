@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
 </script>
+<script setup lang="ts">
+import NavBar from '@/components/NavBar.vue'
+</script>
 
 <template>
   <v-layout>
     <header>
-      <NavBar />
+      <!-- Navbar -->
+      <NavBar/>
     </header>
 
     <v-main>
       <v-container>
-        <router-view />
+        <!-- Contenu -->
+        <router-view  />
       </v-container>
     </v-main>
   </v-layout>
