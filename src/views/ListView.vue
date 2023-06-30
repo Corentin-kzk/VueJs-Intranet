@@ -37,7 +37,7 @@ const onDeleteUser = async (removeUser: User | null) => {
   if (removeUser) {
     try {
       await remove(removeUser.id)
-      users.value = users.value?.filter((user) => user.id !== removeUser.id)
+      users.value = users.value?.filter((user) => user.id !== removeUser.id) ?? []
       onDeleteState.value = { error: false, message: "all is good" }
     } catch (error) {
       onDeleteState.value = { error: true, message: (error as APIError).message }

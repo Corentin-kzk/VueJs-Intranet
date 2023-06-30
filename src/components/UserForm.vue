@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { isMajor, isValidEmail, isValidPhone } from '@/lib/helpers'
-import { User } from '@/services/users.types'
-import { ref, toRefs } from 'vue';
+import type { User } from '@/services/users.types'
+import { ref } from 'vue';
 import { reactive } from 'vue'
 
 
