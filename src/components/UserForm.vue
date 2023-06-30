@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { isMajor, isValidEmail, isValidPhone } from '@/lib/helpers'
-import type { User } from '@/services/users.types'
+import { User } from '@/services/users.types'
+import { ref, toRefs } from 'vue';
 import { reactive } from 'vue'
 
+
+const props = defineProps<{user? : User}>()
 const formUser = reactive<Partial<User>>({
   gender: 'male',
   firstname: '',
@@ -12,7 +15,8 @@ const formUser = reactive<Partial<User>>({
   birthdate: '',
   city: '',
   country: '',
-  photo: ''
+  photo: '',
+  ...props.user
 })
 
 const rules = {
@@ -23,10 +27,20 @@ const rules = {
   url: (value: string) =>
     value.trim().length === 0 || value.startsWith('http') || "L'URL est invalide"
 }
+
+
+const $emit = defineEmits<{(eventName : 'validate', payload: Partial<User>): void}>();
+
+function submitForm() {
+  if(formState.value) {
+    $emit("validate", formUser)
+  }
+}
+const formState = ref()
 </script>
 
 <template>
-  <v-form validate-on="blur" class="mb-8">
+  <v-form validate-on="blur" class="mb-8" @submit.prevent="submitForm" v-model="formState">
     <v-row no-gutters>
       <v-col cols="12" sm="8" offset-sm="2" md="6" offset-md="3">
         <!-- Civilité -->

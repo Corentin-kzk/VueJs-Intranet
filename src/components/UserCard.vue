@@ -8,7 +8,13 @@ export default {
     user: {
       type: Object as PropType<User>,
       required: true
-    }
+    },
+    onDelete : {
+      type: Function as PropType<(user : User) => void>
+    },
+    onUpdate : {
+      type: Function as PropType<(user : User) => void>
+    },
   },
   computed: {
     age() {
@@ -49,8 +55,8 @@ export default {
         </v-card-text>
 
         <v-card-actions class="justify-center">
-          <v-btn variant="outlined" size="x-small" color="teal">Modifier</v-btn>
-          <v-btn variant="outlined" size="x-small" color="teal">Supprimer</v-btn>
+          <v-btn variant="outlined" v-if="onUpdate" @click="$emit('update', user)" size="x-small" color="teal">Modifier</v-btn>
+          <v-btn variant="outlined" v-if="onDelete" @click="$emit('delete', user)" size="x-small" color="teal">Supprimer</v-btn>
         </v-card-actions>
       </v-col>
     </v-row>
